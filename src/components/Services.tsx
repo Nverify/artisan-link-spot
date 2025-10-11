@@ -65,7 +65,7 @@ const Services = () => {
   return (
     <section id="services" className="py-20 px-4 bg-muted/30">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             Services We Cover
           </h2>
@@ -80,12 +80,13 @@ const Services = () => {
             return (
               <Card 
                 key={index}
-                className="p-6 hover:shadow-[var(--shadow-card)] transition-all cursor-pointer group border-border hover:border-primary/50"
+                className="p-6 hover-lift hover-glow transition-all cursor-pointer group border-border hover:border-primary/50 animate-fade-in-up"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-all group-hover:rotate-6">
                   <Icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-3">
