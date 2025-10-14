@@ -162,6 +162,25 @@ All colors MUST be HSL.
     @apply transition-transform duration-300 hover:scale-[1.02];
   }
   
+  /* Improve touch interactions on mobile */
+  @media (hover: none) and (pointer: coarse) {
+    .hover-lift:active {
+      transform: translateY(-8px);
+    }
+    
+    .hover-scale:active {
+      transform: scale(1.02);
+    }
+    
+    .animate-float {
+      animation: none;
+    }
+    
+    .animate-pulse-scale {
+      animation: none;
+    }
+  }
+  
   .mesh-gradient {
     background: var(--gradient-mesh);
   }
