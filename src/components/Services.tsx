@@ -63,13 +63,14 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-20 px-4 bg-muted/30">
+    <section id="services" className="py-20 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 mesh-gradient opacity-50 -z-10" />
       <div className="container mx-auto">
-        <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Services We Cover
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
             From minor repairs to major projects, find skilled artisans for every need
           </p>
         </div>
@@ -80,19 +81,21 @@ const Services = () => {
             return (
               <Card 
                 key={index}
-                className="p-6 hover-lift hover-glow transition-all cursor-pointer group border-border hover:border-primary/50 animate-fade-in-up"
+                className="relative p-8 hover-lift hover-glow transition-all cursor-pointer group glass border-2 border-border/50 hover:border-primary/50 animate-fade-in-up overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-all group-hover:rotate-6">
-                  <Icon className="w-6 h-6 text-primary" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-bl-[4rem] -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-all group-hover:rotate-6 shadow-lg">
+                  <Icon className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-3">
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                   {service.description}
                 </p>
-                <div className="text-xs text-primary font-medium">
+                <div className="inline-flex items-center gap-2 text-sm text-primary font-bold bg-primary/10 px-3 py-1.5 rounded-full">
                   {service.jobs}
                 </div>
               </Card>
