@@ -12,7 +12,7 @@ const Footer = () => {
               <img
                 src={logo}
                 alt="FixRite Logo"
-                className="h-10 sm:h-12 mb-4 sm:mb-6"
+                className="h-20 sm:h-20 md:h-24 mb-4 sm:mb-6 brightness-110 contrast-110 drop-shadow-md rounded-lg"
               />
               <p className="text-secondary-foreground/90 text-xs sm:text-sm leading-relaxed font-medium">
                 Connecting skilled artisans with people who need their services.
