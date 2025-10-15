@@ -29,7 +29,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="FixRite Logo"
-              className="h-15 sm:h-12 animate-float group-hover:scale-110 transition-transform"
+              className="h-8 sm:h-10 md:h-12 lg:h-14 w-auto object-contain animate-float group-hover:scale-105 transition-transform drop-shadow-lg"
             />
           </div>
 
