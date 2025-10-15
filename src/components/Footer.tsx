@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-8 sm:mb-10">
           <div className="animate-fade-in-up stagger-1">
-            <img src={logo} alt="FixRite Logo" className="h-10 sm:h-12 mb-4 sm:mb-6 brightness-0 invert" />
+            <img src={logo} alt="FixRite Logo" className="h-10 sm:h-12 mb-4 sm:mb-6" />
             <p className="text-secondary-foreground/90 text-xs sm:text-sm leading-relaxed font-medium">
               Connecting skilled artisans with people who need their services. One fix at a time.
             </p>
