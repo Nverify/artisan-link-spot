@@ -57,6 +57,8 @@ const formSchema = z.object({
   fullName: z.string().min(3, "Full name must be at least 3 characters").max(100),
   phoneNumber: z.string().regex(/^(\+234|0)[789]\d{9}$/, "Enter valid Nigerian phone number (e.g., 08012345678)"),
   email: z.string().email("Invalid email address").max(255),
+  bvn: z.string().regex(/^\d{11}$/, "BVN must be exactly 11 digits").optional().or(z.literal("")),
+  nin: z.string().regex(/^\d{11}$/, "NIN must be exactly 11 digits").optional().or(z.literal("")),
   trade: z.string().min(1, "Please select your trade"),
   otherTrade: z.string().optional(),
   yearsOfExperience: z.string().min(1, "Years of experience is required"),
@@ -66,6 +68,9 @@ const formSchema = z.object({
   guarantorName: z.string().min(3, "Guarantor's name is required").max(100),
   guarantorPhone: z.string().regex(/^(\+234|0)[789]\d{9}$/, "Enter valid Nigerian phone number"),
   certifications: z.string().max(500).optional(),
+}).refine((data) => data.bvn || data.nin, {
+  message: "Please provide either BVN or NIN for identity verification",
+  path: ["bvn"],
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -80,6 +85,8 @@ const ArtisanSignup = () => {
       fullName: "",
       phoneNumber: "",
       email: "",
+      bvn: "",
+      nin: "",
       trade: "",
       otherTrade: "",
       yearsOfExperience: "",
@@ -200,6 +207,60 @@ const ArtisanSignup = () => {
                       )}
                     />
                   </div>
+                </div>
+
+                {/* Identity Verification (KYC) */}
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold mb-4 text-foreground">Identity Verification (KYC)</h2>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Provide either your BVN or NIN for identity verification. This helps build trust with customers.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    <FormField
+                      control={form.control}
+                      name="bvn"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Bank Verification Number (BVN)</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="12345678901" 
+                              maxLength={11}
+                              {...field} 
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            11-digit BVN for verification
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="nin"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>National Identification Number (NIN)</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="12345678901" 
+                              maxLength={11}
+                              {...field} 
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            11-digit NIN for verification
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 bg-primary/5 p-3 rounded-lg border border-primary/10">
+                    <strong>Note:</strong> Your BVN/NIN is encrypted and securely stored. We use this for identity verification only and never share it with third parties.
+                  </p>
                 </div>
 
                 {/* Trade Information */}
