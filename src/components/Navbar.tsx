@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -37,7 +39,12 @@ const Navbar = () => {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <Button variant="ghost" className="hover-scale font-semibold text-xs sm:text-sm h-9 sm:h-10 px-3 sm:px-4">Sign In</Button>
-            <Button className="bg-gradient-to-r from-primary to-secondary hover-scale shadow-lg font-bold text-xs sm:text-sm h-9 sm:h-10 px-3 sm:px-4">Get Started</Button>
+            <Button 
+              onClick={() => navigate("/artisan-signup")}
+              className="bg-gradient-to-r from-primary to-secondary hover-scale shadow-lg font-bold text-xs sm:text-sm h-9 sm:h-10 px-3 sm:px-4"
+            >
+              Join as Artisan
+            </Button>
           </div>
         </div>
       </div>

@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Wrench } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CTA = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="py-16 sm:py-20 px-4 relative overflow-hidden">
       <div className="absolute inset-0 mesh-gradient -z-10" />
@@ -31,7 +34,8 @@ const CTA = () => {
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button 
-                size="lg" 
+                size="lg"
+                onClick={() => navigate("/artisan-signup")}
                 className="bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover-lift border-2 border-white/30 shadow-xl text-sm sm:text-base h-12 sm:h-14 px-6 sm:px-8 font-bold w-full sm:w-auto touch-manipulation"
               >
                 Sign Up as Artisan
