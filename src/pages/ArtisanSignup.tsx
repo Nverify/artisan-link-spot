@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+
 import { Label } from "@/components/ui/label";
 import {
   Form,
@@ -57,6 +57,8 @@ const formSchema = z.object({
   fullName: z.string().min(3, "Full name must be at least 3 characters").max(100),
   phoneNumber: z.string().regex(/^(\+234|0)[789]\d{9}$/, "Enter valid Nigerian phone number (e.g., 08012345678)"),
   email: z.string().email("Invalid email address").max(255),
+  password: z.string().min(8, "Password must be at least 8 characters").max(100),
+  confirmPassword: z.string(),
   bvn: z.string().regex(/^\d{11}$/, "BVN must be exactly 11 digits").optional().or(z.literal("")),
   nin: z.string().regex(/^\d{11}$/, "NIN must be exactly 11 digits").optional().or(z.literal("")),
   trade: z.string().min(1, "Please select your trade"),
@@ -64,13 +66,12 @@ const formSchema = z.object({
   yearsOfExperience: z.string().min(1, "Years of experience is required"),
   state: z.string().min(1, "Please select your state"),
   city: z.string().min(2, "City/LGA is required").max(100),
-  address: z.string().max(200).optional(),
-  guarantorName: z.string().min(3, "Guarantor's name is required").max(100),
-  guarantorPhone: z.string().regex(/^(\+234|0)[789]\d{9}$/, "Enter valid Nigerian phone number"),
-  certifications: z.string().max(500).optional(),
 }).refine((data) => data.bvn || data.nin, {
   message: "Please provide either BVN or NIN for identity verification",
   path: ["bvn"],
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -85,6 +86,8 @@ const ArtisanSignup = () => {
       fullName: "",
       phoneNumber: "",
       email: "",
+      password: "",
+      confirmPassword: "",
       bvn: "",
       nin: "",
       trade: "",
@@ -92,10 +95,6 @@ const ArtisanSignup = () => {
       yearsOfExperience: "",
       state: "",
       city: "",
-      address: "",
-      guarantorName: "",
-      guarantorPhone: "",
-      certifications: "",
     },
   });
 
@@ -201,6 +200,34 @@ const ArtisanSignup = () => {
                           <FormLabel>Email Address *</FormLabel>
                           <FormControl>
                             <Input type="email" placeholder="john@example.com" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Password *</FormLabel>
+                          <FormControl>
+                            <Input type="password" placeholder="Minimum 8 characters" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="confirmPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Confirm Password *</FormLabel>
+                          <FormControl>
+                            <Input type="password" placeholder="Re-enter password" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -331,33 +358,12 @@ const ArtisanSignup = () => {
                         </FormItem>
                       )}
                     />
-
-                    <FormField
-                      control={form.control}
-                      name="certifications"
-                      render={({ field }) => (
-                        <FormItem className="md:col-span-2">
-                          <FormLabel>Certifications/Training (Optional)</FormLabel>
-                          <FormControl>
-                            <Textarea 
-                              placeholder="List any relevant certifications, training programs, or apprenticeships"
-                              className="resize-none"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormDescription>
-                            Include institution name and year if applicable
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                   </div>
                 </div>
 
                 {/* Location Information */}
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-bold mb-4 text-foreground">Location & Address</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold mb-4 text-foreground">Location</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <FormField
                       control={form.control}
@@ -392,57 +398,6 @@ const ArtisanSignup = () => {
                           <FormLabel>City/LGA *</FormLabel>
                           <FormControl>
                             <Input placeholder="e.g., Ikeja, Wuse" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="address"
-                      render={({ field }) => (
-                        <FormItem className="md:col-span-2">
-                          <FormLabel>Workshop/Business Address (Optional)</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Street address, landmark" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                {/* Guarantor Information */}
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-bold mb-4 text-foreground">Guarantor Information</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                    <FormField
-                      control={form.control}
-                      name="guarantorName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Guarantor's Full Name *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Guarantor name" {...field} />
-                          </FormControl>
-                          <FormDescription>
-                            A person who can vouch for you
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="guarantorPhone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Guarantor's Phone *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="08012345678" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
