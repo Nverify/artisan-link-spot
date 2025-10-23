@@ -46,12 +46,12 @@ const Navbar = () => {
             >
               How It Works
             </a>
-            <a
-              href="#artisans"
+            <button
+              onClick={() => navigate("/find-artisan")}
               className="text-foreground/80 hover:text-primary transition-colors link-underline font-semibold text-sm xl:text-base"
             >
               Find Artisans
-            </a>
+            </button>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
