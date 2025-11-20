@@ -283,13 +283,15 @@ const FindArtisan = () => {
                 <CardFooter className="pt-4 border-t border-border/50">
                   <Button 
                     className="w-full bg-gradient-to-r from-primary to-secondary hover-scale"
-                    onClick={() => {
-                      const phoneNumber = artisan.phone.replace(/^0/, '234');
-                      const message = encodeURIComponent(`Hi ${artisan.name}, I found your profile on the artisan platform and I'm interested in your ${artisan.trade.toLowerCase()} services.`);
-                      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-                    }}
+                    asChild
                   >
-                    Contact Artisan
+                    <a
+                      href={`https://wa.me/${artisan.phone.replace(/^0/, '234')}?text=${encodeURIComponent(`Hi ${artisan.name}, I found your profile on the artisan platform and I'm interested in your ${artisan.trade.toLowerCase()} services.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Contact Artisan
+                    </a>
                   </Button>
                 </CardFooter>
               </Card>
