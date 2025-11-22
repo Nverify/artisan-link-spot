@@ -286,7 +286,7 @@ const FindArtisan = () => {
                     asChild
                   >
                     <a
-                      href={`https://wa.me/${artisan.phone.replace(/^0/, '234')}?text=${encodeURIComponent(`Hi ${artisan.name}, I found your profile on the artisan platform and I'm interested in your ${artisan.trade.toLowerCase()} services.`)}`}
+                      href={`https://wa.me/${artisan.phone.replace(/^0/, '234')}?text=${encodeURIComponent(`Hi ${artisan.name}, I found your profile on the FixRite platform and I'm interested in your ${artisan.trade.toLowerCase()} services.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
