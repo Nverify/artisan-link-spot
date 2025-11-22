@@ -46,7 +46,7 @@ const mockArtisans = [
     reviews: 47,
     location: "Ikeja, Lagos",
     state: "Lagos",
-    phone: "08012345678",
+    phone: "08030914767",
     email: "chinedu@example.com",
     verified: true,
   },
