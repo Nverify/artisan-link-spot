@@ -33,6 +33,7 @@ const Hero = () => {
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in-up stagger-3">
               <Button
+                 onClick={() => navigate("/find-artisan")}
                 size="lg"
                 className="group hover-scale hover-glow shadow-lg text-sm sm:text-base h-12 sm:h-14 px-6 sm:px-8 bg-gradient-to-r from-primary to-secondary w-full sm:w-auto"
               >
