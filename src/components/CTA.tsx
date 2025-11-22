@@ -29,7 +29,7 @@ const CTA = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up stagger-2">
-              <Button size="lg" className="group hover-lift bg-white text-primary hover:bg-white/90 shadow-xl text-sm sm:text-base h-12 sm:h-14 px-6 sm:px-8 font-bold w-full sm:w-auto touch-manipulation">
+              <Button onClick={() => navigate("/find-artisan")} size="lg" className="group hover-lift bg-white text-primary hover:bg-white/90 shadow-xl text-sm sm:text-base h-12 sm:h-14 px-6 sm:px-8 font-bold w-full sm:w-auto touch-manipulation">
                 Find an Artisan Now
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
