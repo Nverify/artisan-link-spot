@@ -72,7 +72,7 @@ const mockArtisans = [
     reviews: 68,
     location: "Surulere, Lagos",
     state: "Lagos",
-    phone: "08123456789",
+    phone: "07056957291",
     email: "emeka@example.com",
     verified: true,
   },
