@@ -57,6 +57,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2 sm:gap-3">
             <Button
               variant="ghost"
+              onClick={() => navigate("/auth")}
               className="hover-scale font-semibold text-xs sm:text-sm h-9 sm:h-10 px-3 sm:px-4"
             >
               Sign In
