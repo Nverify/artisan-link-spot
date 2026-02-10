@@ -538,7 +538,7 @@ const ArtisanDashboard = () => {
                     { id: 4, customer: "Chief Nwankwo", rating: 5, date: "Dec 5, 2025", comment: "Outstanding electrical work. Very thorough and explained everything clearly." },
                     { id: 5, customer: "Mrs. Eze", rating: 4, date: "Nov 28, 2025", comment: "Reliable and professional. Installed solar panels perfectly." },
                   ].map(review => (
-                    <div key={review.id} className="p-4 rounded-lg bg-muted/50 space-y-2">
+                    <div key={review.id} className="p-4 rounded-lg bg-muted/50 space-y-2 hover:bg-muted hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Avatar className="h-9 w-9">
