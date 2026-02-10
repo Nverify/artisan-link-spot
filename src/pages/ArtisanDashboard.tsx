@@ -491,7 +491,81 @@ const ArtisanDashboard = () => {
             </div>
           )}
 
-          {activeTab !== "overview" && activeTab !== "profile" && (
+          {activeTab === "reviews" && (
+            <div className="space-y-6">
+              {/* Rating Summary */}
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex flex-col sm:flex-row items-center gap-6">
+                    <div className="text-center">
+                      <p className="text-5xl font-bold text-foreground">{artisan.rating}</p>
+                      <div className="flex items-center gap-1 mt-2 justify-center">
+                        {[1, 2, 3, 4, 5].map(i => (
+                          <Star key={i} className={`h-5 w-5 ${i <= Math.round(artisan.rating) ? 'fill-primary text-primary' : 'text-muted-foreground/30'}`} />
+                        ))}
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-1">{artisan.reviewCount} reviews</p>
+                    </div>
+                    <div className="flex-1 w-full space-y-2">
+                      {[
+                        { stars: 5, count: 30 },
+                        { stars: 4, count: 10 },
+                        { stars: 3, count: 4 },
+                        { stars: 2, count: 2 },
+                        { stars: 1, count: 1 },
+                      ].map(row => (
+                        <div key={row.stars} className="flex items-center gap-2 text-sm">
+                          <span className="w-8 text-muted-foreground text-right">{row.stars}★</span>
+                          <Progress value={(row.count / artisan.reviewCount) * 100} className="h-2 flex-1" />
+                          <span className="w-6 text-muted-foreground">{row.count}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Review List */}
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">Customer Reviews</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    { id: 1, customer: "Mrs. Okafor", rating: 5, date: "Dec 20, 2025", comment: "Excellent work on my house rewiring. Very professional and completed on time. Highly recommend!" },
+                    { id: 2, customer: "Mr. Adeyemi", rating: 5, date: "Dec 15, 2025", comment: "Fixed my generator quickly and at a fair price. Very knowledgeable." },
+                    { id: 3, customer: "Dr. Bello", rating: 4, date: "Dec 10, 2025", comment: "Good AC installation. Came on time and did a clean job. Would hire again." },
+                    { id: 4, customer: "Chief Nwankwo", rating: 5, date: "Dec 5, 2025", comment: "Outstanding electrical work. Very thorough and explained everything clearly." },
+                    { id: 5, customer: "Mrs. Eze", rating: 4, date: "Nov 28, 2025", comment: "Reliable and professional. Installed solar panels perfectly." },
+                  ].map(review => (
+                    <div key={review.id} className="p-4 rounded-lg bg-muted/50 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-9 w-9">
+                            <AvatarFallback className="bg-primary/10 text-primary text-xs font-semibold">
+                              {review.customer.split(" ").map(n => n[0]).join("")}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-medium text-foreground text-sm">{review.customer}</p>
+                            <p className="text-xs text-muted-foreground">{review.date}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-0.5">
+                          {[1, 2, 3, 4, 5].map(i => (
+                            <Star key={i} className={`h-3.5 w-3.5 ${i <= review.rating ? 'fill-primary text-primary' : 'text-muted-foreground/30'}`} />
+                          ))}
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{review.comment}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {activeTab !== "overview" && activeTab !== "profile" && activeTab !== "reviews" && (
             <Card className="min-h-[400px] flex items-center justify-center">
               <CardContent className="text-center">
                 <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
