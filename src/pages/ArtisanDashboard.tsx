@@ -371,18 +371,134 @@ const ArtisanDashboard = () => {
             </div>
           )}
 
-          {activeTab !== "overview" && (
+          {activeTab === "profile" && (
+            <div className="space-y-6">
+              {/* Profile Completeness */}
+              <Card>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-foreground">Profile Completeness</span>
+                    <span className="text-sm font-bold text-primary">85%</span>
+                  </div>
+                  <Progress value={85} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-2">Add a profile photo and certifications to reach 100%</p>
+                </CardContent>
+              </Card>
+
+              {/* Avatar & Basic Info */}
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex flex-col sm:flex-row items-center gap-6">
+                    <Avatar className="h-28 w-28 border-4 border-primary/20">
+                      <AvatarImage src={artisan.avatar} />
+                      <AvatarFallback className="bg-primary/10 text-primary font-bold text-2xl">
+                        {artisan.name.split(" ").map(n => n[0]).join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 text-center sm:text-left space-y-2">
+                      <h2 className="text-2xl font-bold text-foreground">{artisan.name}</h2>
+                      <p className="text-muted-foreground font-medium">{artisan.profession}</p>
+                      <div className="flex items-center justify-center sm:justify-start gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Star className="h-4 w-4 fill-primary text-primary" />
+                          <span className="font-semibold text-foreground">{artisan.rating}</span> ({artisan.reviewCount} reviews)
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Briefcase className="h-4 w-4" /> {artisan.completedJobs} jobs
+                        </span>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <Settings className="h-4 w-4" /> Edit Profile
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* About */}
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">About</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Certified electrician with 8+ years of experience in residential and commercial electrical installations, repairs, and maintenance across Lagos.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Contact Details */}
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg">Contact Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-muted"><MessageSquare className="h-4 w-4 text-muted-foreground" /></div>
+                      <span className="text-foreground">+234 801 234 5678</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-muted"><User className="h-4 w-4 text-muted-foreground" /></div>
+                      <span className="text-foreground">adewale.j@email.com</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-muted"><Calendar className="h-4 w-4 text-muted-foreground" /></div>
+                      <span className="text-foreground">Ikeja, Lagos</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Stats */}
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg">Stats & Info</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">Experience</span>
+                      <span className="font-medium text-foreground">8 years</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">Member Since</span>
+                      <span className="font-medium text-foreground">{artisan.memberSince}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">Verification</span>
+                      <Badge variant="secondary" className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">Verified</Badge>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-muted-foreground">Completed Jobs</span>
+                      <span className="font-bold text-foreground">{artisan.completedJobs}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Skills */}
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">Skills & Expertise</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {["Wiring", "Generator Repair", "AC Installation", "Solar Panel", "House Rewiring"].map((skill) => (
+                      <Badge key={skill} variant="secondary" className="px-3 py-1.5 text-sm">{skill}</Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {activeTab !== "overview" && activeTab !== "profile" && (
             <Card className="min-h-[400px] flex items-center justify-center">
               <CardContent className="text-center">
                 <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                  {sidebarItems.find(item => item.id === activeTab)?.icon && (
-                    <div className="h-8 w-8 text-muted-foreground">
-                      {(() => {
-                        const Icon = sidebarItems.find(item => item.id === activeTab)?.icon;
-                        return Icon ? <Icon className="h-8 w-8" /> : null;
-                      })()}
-                    </div>
-                  )}
+                  {(() => {
+                    const Icon = sidebarItems.find(item => item.id === activeTab)?.icon;
+                    return Icon ? <Icon className="h-8 w-8 text-muted-foreground" /> : null;
+                  })()}
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2 capitalize">{activeTab}</h3>
                 <p className="text-muted-foreground">This section is coming soon. Enable Lovable Cloud to unlock full functionality.</p>
